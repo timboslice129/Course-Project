@@ -1,0 +1,49 @@
+---
+title: "NBADivisonSimulation"
+author: "Tim"
+date: "08/03/2020"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+- This Shiny App aims to predict the outcome of the current season in the Atlantic division of the NBA.
+- This is essentially a two horse race between Boston and Toronto with other teams realistically out of contention.
+- The app works by taking the win probabilities of all remaining Boston and Toronto games and performs a Monte Carlo simulation.
+- The simulation calculates how many wins both Boston and Toronto finish the season with and then returns the outcome of the division as a data frame.  
+
+
+## How it works
+
+- The user has the option to input the probabilites for all remaining games, however default probailites are provided. 
+- Once the probabilities are provided the user hits the "run" button and Shinys reactivity feature re-runs the simulation and provides new results.
+- Shiny is especially usefull for this application because the win probabilites are constantly changing as injuries occur. 
+- This reactivity allows a novice user to constantly update the simulation without any programming knowledge. 
+
+## Explaining the code
+-Inputted probabilites are stored in a vector as such:
+```{r, echo = TRUE}
+#Each element in the vector represents the probability of boston winning that particular game
+boston <- c(.34,.55,.7,.4,.2,.8,.4,.3,.6,.5)
+#We then use these probalities to generate random binomials for each game as follows:
+bostonresults <- rbinom(length(boston),1, boston)
+bostonresults
+#Current number of wins for boston
+bostoncurrent <- 42
+#We sum up our predicted results and add them to the current number of wins
+bostonfinal <- sum(bostonresults) + bostoncurrent
+#Our final predicted number of wins:
+bostonfinal
+```
+The same process is repeated for Toronto. When Boston and Toronto play each other we generate a random binomial, add it to Bostons result and assign the inverse to Toronto.
+
+## Explaining the code continued
+
+- The code explained in the previous slide is placed inside a loop and run 10000 times unless the user specifies a different number.
+- After each loop the results are stored on a vector so we have the data from all our simulations.
+- We then compare how often Toronto has more wins than Boston and vice versa. We also calculate how often the two teams are tied.
+
+Thank You
