@@ -5,7 +5,7 @@ library(shinythemes)
 shinyUI(fluidPage(theme = shinytheme("darkly"),
 
     
-    titlePanel("Toronto Boston Division Simulation"),
+    titlePanel("Atlantic Division Simulation"),
 
    
     sidebarLayout(
@@ -16,7 +16,7 @@ shinyUI(fluidPage(theme = shinytheme("darkly"),
                        submitButton(text = "RUN")),
                 column(6, offset = 2, numericInput("SIMS", "SIMS", min=100, max = 1000000, value = 10000)),
             ),
-            img(src="https://images.vexels.com/media/users/3/129509/isolated/preview/b9439b4f4a5115e4e7995ab6450ab1b0-boston-celtics-logo-by-vexels.png", width = "25%", height="25%"),
+            img(src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0e/Philadelphia_76ers_logo.svg/1200px-Philadelphia_76ers_logo.svg.png", width = "25%", height="25%"),
             titlePanel("BostonGames"),
             numericInput("OKC", "OKC home Win Prob:", min = 0, max = 1, value = 0.73),
             numericInput("IND1", "IND away Win Prob:", min = 0, max = 1, value = 0.5),
